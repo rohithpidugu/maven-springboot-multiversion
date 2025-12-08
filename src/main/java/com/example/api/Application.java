@@ -1,12 +1,31 @@
-# Create the file
-nano src/main/java/com/example/api/Application.java
-# Paste the content above, save (Ctrl+O, Enter, Ctrl+X)
+package com.example.api;
 
-# Commit
-git add src/main/java/com/example/api/Application.java
-git commit -m "feat: Add Spring Boot main application class
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-- Create Application.java as entry point
-- Add @SpringBootApplication annotation
-- Configure auto-configuration and component scanning
-- Add comprehensive JavaDoc documentation"
+/**
+ * Main Application class for Spring Boot REST API
+ * 
+ * This is the entry point of the application that initializes
+ * the Spring Boot context and starts the embedded Tomcat server.
+ * 
+ * @SpringBootApplication annotation enables:
+ * - @Configuration: Tags the class as a source of bean definitions
+ * - @EnableAutoConfiguration: Enables Spring Boot's auto-configuration
+ * - @ComponentScan: Enables component scanning in the current package
+ * 
+ * @author Your Name
+ * @version 1.0.0
+ */
+@SpringBootApplication
+public class Application {
+
+    /**
+     * Main method - Entry point for the Spring Boot application
+     * 
+     * @param args Command line arguments
+     */
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+}
