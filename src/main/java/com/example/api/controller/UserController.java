@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import javax.validation.Valid;
 
 /**
  * User Controller - REST API endpoints for user management
@@ -78,7 +79,7 @@ public class UserController {
      * @endpoint POST /api/users
      */
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
         User createdUser = userService.createUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
@@ -92,7 +93,7 @@ public class UserController {
      * @endpoint PUT /api/users/{id}
      */
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @Valid @RequestBody User user) {
         Optional<User> updatedUser = userService.updateUser(id, user);
         return updatedUser.map(ResponseEntity::ok)
                           .orElse(ResponseEntity.notFound().build());

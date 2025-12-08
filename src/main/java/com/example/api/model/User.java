@@ -1,12 +1,15 @@
 package com.example.api.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 /**
  * User Model - Represents a user entity in the system
  * 
  * This is a Plain Old Java Object (POJO) that represents
- * user data in the application.
+ * user data in the application with validation constraints.
  * 
  * @author Your Name
  * @version 1.0.0
@@ -14,10 +17,23 @@ import java.util.Objects;
 public class User {
     
     private Long id;
+    
+    @NotBlank(message = "Username is required")
+    @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
     private String username;
+    
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email must be valid")
     private String email;
+    
+    @NotBlank(message = "First name is required")
+    @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters")
     private String firstName;
+    
+    @NotBlank(message = "Last name is required")
+    @Size(min = 2, max = 50, message = "Last name must be between 2 and 50 characters")
     private String lastName;
+    
     private boolean active;
 
     /**
