@@ -20,7 +20,7 @@
     <packaging>jar</packaging>
 
     <!-- Project Information -->
-    <n>Maven Spring Boot Multi-Version Project</n>
+    <name>Maven Spring Boot Multi-Version Project</name>
     <description>
         A Spring Boot REST API demonstrating Maven multi-version Java compatibility
     </description>
