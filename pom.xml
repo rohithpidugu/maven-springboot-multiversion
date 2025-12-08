@@ -100,5 +100,39 @@
             </plugin>
         </plugins>
     </build>
+<!-- Maven Profiles for Multi-Version Java Support -->
+    <profiles>
+        <!-- Java 8 Profile -->
+        <profile>
+            <id>java8</id>
+            <properties>
+                <java.version>1.8</java.version>
+                <maven.compiler.source>1.8</maven.compiler.source>
+                <maven.compiler.target>1.8</maven.compiler.target>
+            </properties>
+        </profile>
 
-</project>
+        <!-- Java 11 Profile (Default) -->
+        <profile>
+            <id>java11</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <java.version>11</java.version>
+                <maven.compiler.source>11</maven.compiler.source>
+                <maven.compiler.target>11</maven.compiler.target>
+            </properties>
+        </profile>
+
+        <!-- Java 17 Profile -->
+        <profile>
+            <id>java17</id>
+            <properties>
+                <java.version>17</java.version>
+                <maven.compiler.source>17</maven.compiler.source>
+                <maven.compiler.target>17</maven.compiler.target>
+            </properties>
+        </profile>
+    </profiles>
+</project>  
