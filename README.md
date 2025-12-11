@@ -1,5 +1,11 @@
 # Maven Spring Boot Multi-Version Compatibility Project
 
+![Build Status](https://github.com/rohithpidugu/maven-springboot-multiversion/workflows/Maven%20CI%2FCD%20Pipeline/badge.svg)
+![Java](https://img.shields.io/badge/Java-8%20%7C%2011%20%7C%2017-blue)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.7.18-brightgreen)
+![Maven](https://img.shields.io/badge/Maven-3.9+-red)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+
 ## 📚 Project Overview
 
 This project demonstrates building a Spring Boot REST API using Maven with support for multiple Java versions (8, 11, 17). The goal is to understand Maven's build lifecycle, dependency management, and CI/CD integration.
