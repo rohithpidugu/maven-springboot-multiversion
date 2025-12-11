@@ -63,7 +63,342 @@ mvn clean install
 # Run the application
 mvn spring-boot:run
 ```
+## 📡 API Documentation
 
+### Base URL
+```
+http://localhost:8080/api
+```
+
+### Endpoints Overview
+
+| Method | Endpoint | Description | Status Codes |
+|--------|----------|-------------|--------------|
+| GET | `/hello` | Welcome message | 200 |
+| GET | `/hello/health` | Application health check | 200 |
+| GET | `/users` | Get all users | 200 |
+| GET | `/users/{id}` | Get user by ID | 200, 404 |
+| GET | `/users/active` | Get active users only | 200 |
+| GET | `/users/search?name={name}` | Search users by name | 200 |
+| GET | `/users/stats` | Get user statistics | 200 |
+| POST | `/users` | Create new user | 201, 400 |
+| PUT | `/users/{id}` | Update user | 200, 400, 404 |
+| PATCH | `/users/{id}/deactivate` | Deactivate user | 200, 404 |
+| DELETE | `/users/{id}` | Delete user | 204, 404 |
+
+### Detailed Endpoint Documentation
+
+#### 1. Welcome Endpoint
+```http
+GET /api/hello
+```
+
+**Response:**
+```json
+{
+  "message": "Hello from Maven Spring Boot Multi-Version API!",
+  "status": "success"
+}
+```
+
+---
+
+#### 2. Health Check
+```http
+GET /api/hello/health
+```
+
+**Response:**
+```json
+{
+  "status": "UP",
+  "application": "maven-springboot-multiversion",
+  "javaVersion": "11.0.29",
+  "timestamp": 1702156800000
+}
+```
+
+---
+
+#### 3. Get All Users
+```http
+GET /api/users
+```
+
+**Response:**
+```json
+[
+  {
+    "id": 1,
+    "username": "johndoe",
+    "email": "john.doe@example.com",
+    "firstName": "John",
+    "lastName": "Doe",
+    "active": true
+  },
+  {
+    "id": 2,
+    "username": "janedoe",
+    "email": "jane.doe@example.com",
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "active": true
+  }
+]
+```
+
+---
+
+#### 4. Get User by ID
+```http
+GET /api/users/{id}
+```
+
+**Path Parameters:**
+- `id` (Long): User ID
+
+**Success Response (200):**
+```json
+{
+  "id": 1,
+  "username": "johndoe",
+  "email": "john.doe@example.com",
+  "firstName": "John",
+  "lastName": "Doe",
+  "active": true
+}
+```
+
+**Error Response (404):**
+```json
+{
+  "timestamp": "2024-12-10T12:00:00",
+  "status": 404,
+  "error": "Not Found"
+}
+```
+
+---
+
+#### 5. Create User
+```http
+POST /api/users
+Content-Type: application/json
+```
+
+**Request Body:**
+```json
+{
+  "username": "newuser",
+  "email": "newuser@example.com",
+  "firstName": "New",
+  "lastName": "User"
+}
+```
+
+**Validation Rules:**
+- `username`: Required, 3-50 characters
+- `email`: Required, valid email format
+- `firstName`: Required, 2-50 characters
+- `lastName`: Required, 2-50 characters
+
+**Success Response (201):**
+```json
+{
+  "id": 4,
+  "username": "newuser",
+  "email": "newuser@example.com",
+  "firstName": "New",
+  "lastName": "User",
+  "active": true
+}
+```
+
+**Validation Error Response (400):**
+```json
+{
+  "timestamp": "2024-12-10T12:00:00",
+  "status": 400,
+  "error": "Validation Failed",
+  "message": "Invalid input data",
+  "validationErrors": {
+    "email": "Email must be valid",
+    "username": "Username must be between 3 and 50 characters"
+  },
+  "path": "/api/users"
+}
+```
+
+---
+
+#### 6. Update User
+```http
+PUT /api/users/{id}
+Content-Type: application/json
+```
+
+**Path Parameters:**
+- `id` (Long): User ID to update
+
+**Request Body:**
+```json
+{
+  "username": "updateuser",
+  "email": "updated@example.com",
+  "firstName": "Updated",
+  "lastName": "User"
+}
+```
+
+**Success Response (200):**
+```json
+{
+  "id": 1,
+  "username": "updateuser",
+  "email": "updated@example.com",
+  "firstName": "Updated",
+  "lastName": "User",
+  "active": true
+}
+```
+
+---
+
+#### 7. Delete User
+```http
+DELETE /api/users/{id}
+```
+
+**Path Parameters:**
+- `id` (Long): User ID to delete
+
+**Success Response (204):**
+No content
+
+**Error Response (404):**
+User not found
+
+---
+
+#### 8. Search Users
+```http
+GET /api/users/search?name={searchTerm}
+```
+
+**Query Parameters:**
+- `name` (String): Search term for first or last name
+
+**Response:**
+```json
+[
+  {
+    "id": 1,
+    "username": "johndoe",
+    "email": "john.doe@example.com",
+    "firstName": "John",
+    "lastName": "Doe",
+    "active": true
+  }
+]
+```
+
+---
+
+#### 9. Get User Statistics
+```http
+GET /api/users/stats
+```
+
+**Response:**
+```json
+{
+  "totalUsers": 3,
+  "activeUsers": 3,
+  "inactiveUsers": 0
+}
+```
+
+---
+
+### cURL Examples
+
+```bash
+# Get all users
+curl http://localhost:8080/api/users
+
+# Get user by ID
+curl http://localhost:8080/api/users/1
+
+# Create new user
+curl -X POST http://localhost:8080/api/users \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "alice",
+    "email": "alice@example.com",
+    "firstName": "Alice",
+    "lastName": "Wonder"
+  }'
+
+# Update user
+curl -X PUT http://localhost:8080/api/users/1 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "johndoe_updated",
+    "email": "john.updated@example.com",
+    "firstName": "John",
+    "lastName": "Doe"
+  }'
+
+# Delete user
+curl -X DELETE http://localhost:8080/api/users/1
+
+# Search users
+curl "http://localhost:8080/api/users/search?name=John"
+
+# Get statistics
+curl http://localhost:8080/api/users/stats
+```
+
+---
+
+### Postman Collection
+
+Import this into Postman for easy API testing:
+
+```json
+{
+  "info": {
+    "name": "Maven Spring Boot Multi-Version API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Users",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/api/users"
+      }
+    },
+    {
+      "name": "Create User",
+      "request": {
+        "method": "POST",
+        "url": "http://localhost:8080/api/users",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"test@example.com\",\n  \"firstName\": \"Test\",\n  \"lastName\": \"User\"\n}"
+        }
+      }
+    }
+  ]
+}
+```
 ## 📖 Maven Build Lifecycle
 
 This project demonstrates understanding of Maven's build lifecycle:
