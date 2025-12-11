@@ -63,6 +63,72 @@ mvn clean install
 # Run the application
 mvn spring-boot:run
 ```
+
+## ⚡ Quick Reference
+
+### API Endpoints Summary
+
+| Category | Method | Endpoint | Description |
+|----------|--------|----------|-------------|
+| **Health** | GET | `/api/hello` | Welcome message |
+| **Health** | GET | `/api/hello/health` | Health check with Java version |
+| **Users** | GET | `/api/users` | Get all users |
+| **Users** | GET | `/api/users/{id}` | Get user by ID |
+| **Users** | GET | `/api/users/active` | Get active users only |
+| **Users** | GET | `/api/users/search?name={name}` | Search users by name |
+| **Users** | GET | `/api/users/stats` | Get user statistics |
+| **Users** | POST | `/api/users` | Create new user |
+| **Users** | PUT | `/api/users/{id}` | Update user |
+| **Users** | PATCH | `/api/users/{id}/deactivate` | Deactivate user |
+| **Users** | DELETE | `/api/users/{id}` | Delete user |
+| **Actuator** | GET | `/api/actuator/health` | Spring Boot health |
+| **Actuator** | GET | `/api/actuator/info` | Application info |
+| **Actuator** | GET | `/api/actuator/metrics` | Application metrics |
+
+### Quick Start Commands
+
+```bash
+# Clone and run
+git clone https://github.com/rohithpidugu/maven-springboot-multiversion.git
+cd maven-springboot-multiversion
+mvn clean install
+mvn spring-boot:run
+
+# Test the API
+curl http://localhost:8080/api/hello
+curl http://localhost:8080/api/users
+```
+
+### Maven Profile Commands
+
+```bash
+# Build with Java 8
+mvn clean install -Pjava8
+
+# Build with Java 11 (default)
+mvn clean install -Pjava11
+
+# Build with Java 17
+mvn clean install -Pjava17
+
+# Run tests
+mvn test
+
+# Generate coverage report
+mvn jacoco:report
+
+# Run code quality check
+mvn checkstyle:check
+```
+
+### Project Statistics
+
+- **Total Endpoints:** 14
+- **Test Coverage:** 80%+
+- **Java Versions Supported:** 3 (8, 11, 17)
+- **CI/CD:** GitHub Actions
+- **Code Quality:** Checkstyle + JaCoCo
+
 ## 📡 API Documentation
 
 ### Base URL
