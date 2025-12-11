@@ -83,3 +83,7 @@ logs/
 # Temporary files
 *.tmp
 *.temp
+
+# Logs directory
+logs/
+*.log
