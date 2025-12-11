@@ -397,9 +397,9 @@ What actually happens
 
 ## 💬 Getting Help
 
-- **GitHub Issues**: For bugs and feature requests
-- **Discussions**: For questions and general discussion
-- **Email**: [your-email@example.com]
+- **GitHub Issues**: For bugs and feature requests  
+- **Discussions**: For questions and collaboration  
+- **Email**: contact@rohithpidugu.com
 
 ---
 
@@ -408,26 +408,16 @@ What actually happens
 ### Useful Maven Commands
 
 ```bash
-# Clean build
 mvn clean install
-
-# Skip tests
 mvn clean install -DskipTests
-
-# Run with specific profile
 mvn spring-boot:run -Pjava11
-
-# Generate all reports
 mvn clean verify site
-
-# Update dependencies
 mvn versions:display-dependency-updates
 ```
 
 ### Debugging
 
 ```bash
-# Run in debug mode
 mvn spring-boot:run -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"
 ```
 
@@ -448,4 +438,4 @@ Thank you for contributing to this project! Every contribution, no matter how sm
 
 ---
 
-**Last Updated:** Day 3 - December 10, 2025
+**Last Updated:** December 11, 2025
